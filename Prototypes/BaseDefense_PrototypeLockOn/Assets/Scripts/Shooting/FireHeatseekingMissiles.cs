@@ -10,8 +10,12 @@ public class FireHeatseekingMissiles : MonoBehaviour
     [SerializeField] float _missileCooldown;
     [SerializeField] float lockonTime;
 
-    private List<EnemyUnit> _validTargets = new List<EnemyUnit>();
-    private EnemyUnit[] _targets;
+    [SerializeField] private List<GameObject> _crosshairs = new List<GameObject>();
+
+    [SerializeField] private List<EnemyUnit> _validTargets = new List<EnemyUnit>();
+    [SerializeField] private EnemyUnit[] _targets;
+
+    private bool _bCanFire = true;
 
     private void Start()
     {
@@ -28,6 +32,7 @@ public class FireHeatseekingMissiles : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             StopCoroutine(nameof(AcquireTargets));
+            _bCanFire = true;
         }
         //fire missiles
         if (Input.GetKeyDown(KeyCode.Space))
@@ -38,8 +43,28 @@ public class FireHeatseekingMissiles : MonoBehaviour
 
     IEnumerator AcquireTargets()
     {
+        _bCanFire = false;
+
+        GetValidTargets();
+
+        for (int i = 0; i < Mathf.Min(_crosshairs.Count, _validTargets.Count); i++)
+        {
+            if (_validTargets[i] != null)
+            {
+                GameObject ch = _crosshairs[i];
+                ch.gameObject.SetActive(true);
+                ch.transform.SetParent(_validTargets[i].transform);
+                ch.transform.localPosition = Vector3.zero; 
+            }
+        }
+
         yield return new WaitForSeconds(lockonTime);
 
+        _bCanFire = true;
+    }
+
+    private void GetValidTargets()
+    {
         _validTargets.Clear();
         foreach (EnemyUnit t in _targets)
         {
@@ -51,10 +76,21 @@ public class FireHeatseekingMissiles : MonoBehaviour
                 }
             }
         }
+        _validTargets.Sort();
+    }
+
+    private void ClearTargets()
+    {
+        _validTargets.Clear();
+        foreach (GameObject ch in _crosshairs)
+        {
+            ch.SetActive(false);
+        }
     }
 
     private void MissileFireProtocol()
     {
+        if (!_bCanFire) { return; }
         if (_validTargets == null) { return; }
 
         if (_validTargets.Count == 0) { return; }
@@ -68,12 +104,13 @@ public class FireHeatseekingMissiles : MonoBehaviour
             {
                 FireMissile(missileIndex ^ 1, _validTargets[1]);
             }
+            ClearTargets();
         }
         else if (_missilePlaceholder[missileIndex ^ 1].gameObject.activeSelf)
         {
             FireMissile(missileIndex ^ 1, _validTargets[0]);
+            ClearTargets();
         }
-        _validTargets.Clear();
     }
 
     private void FireMissile(int missileIndex, EnemyUnit target)

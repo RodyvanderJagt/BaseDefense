@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyUnit : MonoBehaviour, IDamageable
+public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 {
     [SerializeField] private float _health = 100;
 
@@ -19,7 +20,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable
 
     protected virtual void HandleDestruction()
     {
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 
     public bool isValidTarget() //Don't like this very much
@@ -30,4 +31,9 @@ public class EnemyUnit : MonoBehaviour, IDamageable
         return true;
     }
 
+    public int CompareTo(object obj)
+    {
+        EnemyUnit otherEnemy = obj as EnemyUnit;
+        return this.transform.position.z.CompareTo(otherEnemy.transform.position.z);
+    }
 }
