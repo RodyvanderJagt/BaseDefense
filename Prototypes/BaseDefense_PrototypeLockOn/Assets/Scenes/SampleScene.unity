@@ -193,6 +193,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyTank (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 955944020011995159, guid: 08e156c2ad48ead4d9310f62c27cce2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 955944020012413377, guid: 08e156c2ad48ead4d9310f62c27cce2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -262,6 +267,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyTank (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 955944020011995159, guid: 08e156c2ad48ead4d9310f62c27cce2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 955944020012413377, guid: 08e156c2ad48ead4d9310f62c27cce2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -330,6 +340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyTank (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 955944020011995159, guid: 08e156c2ad48ead4d9310f62c27cce2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 955944020012413377, guid: 08e156c2ad48ead4d9310f62c27cce2b,
         type: 3}
@@ -465,6 +480,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyTank (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 955944020011995159, guid: 08e156c2ad48ead4d9310f62c27cce2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 955944020012413377, guid: 08e156c2ad48ead4d9310f62c27cce2b,
         type: 3}
@@ -753,6 +773,11 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1430566123}
+    - target: {fileID: 5107441770308632460, guid: e49c04410609b1b4e850b0d6cdb209b0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49c04410609b1b4e850b0d6cdb209b0, type: 3}
 --- !u!1 &1903292295 stripped
@@ -778,6 +803,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 955944020011995159, guid: 08e156c2ad48ead4d9310f62c27cce2b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 955944020012413377, guid: 08e156c2ad48ead4d9310f62c27cce2b,
         type: 3}
@@ -902,6 +932,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2675155933603736776, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2675155933603736777, guid: 2daa97c8adfb2d44487bde01b59962b4,
         type: 3}
@@ -1102,5 +1137,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1430566123}
+    - target: {fileID: 5107441770308632460, guid: e49c04410609b1b4e850b0d6cdb209b0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e49c04410609b1b4e850b0d6cdb209b0, type: 3}
