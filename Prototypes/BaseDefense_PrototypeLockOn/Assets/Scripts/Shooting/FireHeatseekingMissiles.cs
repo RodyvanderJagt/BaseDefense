@@ -54,7 +54,7 @@ public class FireHeatseekingMissiles : FireMissiles
         {
             if (t != null)
             {
-                if (t.IsValidTarget())
+                if (t.IsValidTarget)    
                 {
                     _validTargets.Add(t);
                 }
@@ -63,7 +63,7 @@ public class FireHeatseekingMissiles : FireMissiles
         _validTargets.Sort();
 
         TrackTargets();
-    }
+    }   
 
     private void TrackTargets()
     {

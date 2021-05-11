@@ -7,17 +7,29 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 {
     [SerializeField] private float _maxHealth = 100;
     [SerializeField] protected float _speed = 100;
+    [SerializeField] private int _scoreOnDestroy = 100;
+    [SerializeField] private int _damageToBase = 100;
+
     [SerializeField] private float _minRangeZ = 150;
 
     public delegate void ChangeActive(EnemyUnit _unit);
     public event ChangeActive OnInvalid;
 
+    public delegate void UpdateInt(int _points);
+    public static event UpdateInt OnUnitDied;
+
     private float _health;
     [SerializeField] private bool _isTargetable = true;
+
+    public bool IsValidTarget
+    {
+        get { return _isTargetable; }
+    }
 
     private Rigidbody _unitRb;
 
     public float Health => _health;
+    public int DamageToBase => _damageToBase;
 
     protected virtual void OnEnable()
     {
@@ -49,6 +61,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     protected virtual void HandleDestruction()
     {
+        OnUnitDied?.Invoke(_scoreOnDestroy);
         gameObject.SetActive(false);
     }
 
@@ -68,13 +81,6 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
             OnInvalid?.Invoke(this);
             _isTargetable = false;
         }
-    }
-
-    public bool IsValidTarget() 
-    {
-        if(!gameObject.activeSelf) { return false; }
-        if(_health <= 0) { return false;  }
-        return _isTargetable;
     }
 
     public int CompareTo(object obj)
