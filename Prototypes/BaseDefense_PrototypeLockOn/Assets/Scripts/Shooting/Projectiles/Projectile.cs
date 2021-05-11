@@ -18,14 +18,9 @@ public class Projectile : MonoBehaviour
         HandleDestruction();
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Destroy(gameObject);
-    }
-
     protected virtual void HandleDestruction()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }

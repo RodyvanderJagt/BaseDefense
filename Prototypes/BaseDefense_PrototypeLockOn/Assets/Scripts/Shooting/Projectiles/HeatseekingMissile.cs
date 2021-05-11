@@ -6,7 +6,7 @@ public class HeatseekingMissile : Projectile
 {
     [SerializeField] float rotationSpeed;
 
-    private EnemyUnit _target;
+    [SerializeField] private EnemyUnit _target;
     private Vector3 _targetCom;
 
     public EnemyUnit Target
@@ -14,7 +14,7 @@ public class HeatseekingMissile : Projectile
         set { _target = value; }
     }
 
-    void Start()
+    private void OnEnable()
     {
         if (_target != null)
         {
@@ -37,7 +37,7 @@ public class HeatseekingMissile : Projectile
         else
         {
             //Without target, remove itself from game.
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }

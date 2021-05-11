@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireHeatseekingMissiles : MonoBehaviour
+public class FireHeatseekingMissiles : FireMissiles
 {
-    [SerializeField] Projectile _missile;
-    [SerializeField] GameObject[] _missilePlaceholder;
-
-    [SerializeField] float _missileCooldown;
     [SerializeField] float lockonTime;
 
     [SerializeField] private List<GameObject> _crosshairs = new List<GameObject>();
@@ -51,6 +47,7 @@ public class FireHeatseekingMissiles : MonoBehaviour
         {
             if (_validTargets[i] != null)
             {
+                //Crosshairs
                 GameObject ch = _crosshairs[i];
                 ch.gameObject.SetActive(true);
                 ch.transform.SetParent(_validTargets[i].transform);
@@ -111,21 +108,5 @@ public class FireHeatseekingMissiles : MonoBehaviour
             FireMissile(missileIndex ^ 1, _validTargets[0]);
             ClearTargets();
         }
-    }
-
-    private void FireMissile(int missileIndex, EnemyUnit target)
-    {
-        GameObject missilePlaceholder = _missilePlaceholder[missileIndex];
-        missilePlaceholder.gameObject.SetActive(false);
-        Projectile missileToFire = Instantiate(_missile, missilePlaceholder.transform.position, missilePlaceholder.transform.rotation);
-        missileToFire.GetComponent<HeatseekingMissile>().Target = target;
-        StartCoroutine(nameof(MissileCooldown), missileIndex);
-    }
-
-    IEnumerator MissileCooldown()
-    {
-        yield return new WaitForSeconds(_missileCooldown);
-        _missilePlaceholder[0].gameObject.SetActive(true);
-        _missilePlaceholder[1].gameObject.SetActive(true);
     }
 }
