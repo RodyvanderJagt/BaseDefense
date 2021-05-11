@@ -6,24 +6,35 @@ using UnityEngine;
 public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 {
     [SerializeField] private float _maxHealth = 100;
-    [SerializeField] private float _speed = 100;
+    [SerializeField] protected float _speed = 100;
+    [SerializeField] private float _minRangeZ = 150;
 
     public delegate void ChangeActive(EnemyUnit _unit);
-    public event ChangeActive OnDestruction;
+    public event ChangeActive OnInvalid;
 
     private float _health;
-    private bool _isVisible = true;
+    [SerializeField] private bool _isTargetable = true;
+
+    private Rigidbody _unitRb;
 
     public float Health => _health;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         _health = _maxHealth;
+        _unitRb = GetComponent<Rigidbody>();
+        _unitRb.velocity = Vector3.zero;
+        _unitRb.angularVelocity = Vector3.zero;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+
+        if(transform.position.z < _minRangeZ && _isTargetable)
+        {
+            MakeUntargetable();
+        }
     }
 
     public void TakeDamage(float damageTaken)
@@ -31,31 +42,39 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
         _health -= damageTaken; 
         if (_health <= 0)
         {
+            MakeUntargetable();
             HandleDestruction();
         }
     }
 
     protected virtual void HandleDestruction()
     {
-        OnDestruction?.Invoke(this);
         gameObject.SetActive(false);
     }
 
     private void OnBecameVisible()
     {
-        _isVisible = true;
+        _isTargetable = true;
     }
     private void OnBecameInvisible()
     {
-        _isVisible = false;
+        MakeUntargetable();
     }
 
-    public bool isValidTarget() 
+    private void MakeUntargetable()
+    {
+        if (_isTargetable)
+        {
+            OnInvalid?.Invoke(this);
+            _isTargetable = false;
+        }
+    }
+
+    public bool IsValidTarget() 
     {
         if(!gameObject.activeSelf) { return false; }
         if(_health <= 0) { return false;  }
-        if(transform.position.z < 150) { return false; }
-        return _isVisible;
+        return _isTargetable;
     }
 
     public int CompareTo(object obj)

@@ -5,6 +5,11 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObjectPrefab;
+    public Transform PrefabTransform
+    {
+        get { return _gameObjectPrefab.transform; }
+    }
+
     [SerializeField] private int _poolDepth;
 
     private readonly List<GameObject> _pool = new List<GameObject>();
