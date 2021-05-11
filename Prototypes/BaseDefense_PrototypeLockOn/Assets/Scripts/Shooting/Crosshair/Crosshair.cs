@@ -9,7 +9,7 @@ public class Crosshair : MonoBehaviour
 
     [SerializeField] private Color _beginColor = Color.black;
     [SerializeField] private Color _finalColor = Color.red;
-    //[SerializeField] private float _lockOnDuration = 1.0f;
+
     private float t = 0;
 
     private void Start()
@@ -27,5 +27,6 @@ public class Crosshair : MonoBehaviour
     private void OnEnable()
     {
         t = 0;
+        gameObject.transform.rotation = Quaternion.identity;
     }
 }
