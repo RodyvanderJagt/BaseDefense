@@ -6,7 +6,7 @@ public class HeatseekingMissile : Projectile
 {
     [SerializeField] float rotationSpeed;
 
-    [SerializeField] private EnemyUnit _target;
+    private EnemyUnit _target;
     private Vector3 _targetCom;
 
     public EnemyUnit Target

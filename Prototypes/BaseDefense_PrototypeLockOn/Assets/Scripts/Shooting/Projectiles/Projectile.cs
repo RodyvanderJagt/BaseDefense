@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float _speed;
     [SerializeField] protected float _damage;
 
-
     private void OnTriggerEnter(Collider other)
     {
         IDamageable damageTaker = other.GetComponent<IDamageable>();

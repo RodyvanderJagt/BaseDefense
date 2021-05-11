@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private int _currentScore;
-
-    [SerializeField] private int _baseHealth = 1000;
+    [SerializeField] private int _baseMaxHealth = 1000;
+    private int _baseHealth;
+    private int _currentScore;  
 
     private void Start()
     {
         _currentScore = 0;
+        _baseHealth = _baseMaxHealth;
 
         EnemyUnit.OnUnitDied += UpdateScore;
         HandleOutOfBounds.OnUnitInBase += UpdateBaseHealth;

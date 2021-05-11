@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 {
+    [Header("Unit properties")]
     [SerializeField] private float _maxHealth = 100;
     [SerializeField] protected float _speed = 100;
     [SerializeField] private int _scoreOnDestroy = 100;
@@ -18,22 +19,19 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     public delegate void UpdateInt(int _points);
     public static event UpdateInt OnUnitDied;
 
-    private float _health;
-    [SerializeField] private bool _isTargetable = true;
-
-    public bool IsValidTarget
-    {
-        get { return _isTargetable; }
-    }
-
     private Rigidbody _unitRb;
+    private float _health;
+    private bool _isTargetable = true;
 
     public float Health => _health;
+    public bool IsValidTarget => _isTargetable;
     public int DamageToBase => _damageToBase;
 
     protected virtual void OnEnable()
     {
         _health = _maxHealth;
+
+        //Reset velocity
         _unitRb = GetComponent<Rigidbody>();
         _unitRb.velocity = Vector3.zero;
         _unitRb.angularVelocity = Vector3.zero;
@@ -43,6 +41,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     {
         transform.Translate(Vector3.forward * _speed * Time.deltaTime);
 
+        //Moved out of range of target selection
         if(transform.position.z < _minRangeZ && _isTargetable)
         {
             MakeUntargetable();

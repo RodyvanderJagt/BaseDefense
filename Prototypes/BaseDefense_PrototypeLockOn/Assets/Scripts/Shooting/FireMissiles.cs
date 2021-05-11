@@ -5,9 +5,7 @@ using UnityEngine;
 public class FireMissiles : MonoBehaviour
 {
     [SerializeField] private ObjectPool _objectPool;
-
     [SerializeField] protected GameObject[] _missilePlaceholder;
-
     [SerializeField] float _missileCooldown;
 
     protected virtual void FireMissile(int missileIndex, EnemyUnit target = null)

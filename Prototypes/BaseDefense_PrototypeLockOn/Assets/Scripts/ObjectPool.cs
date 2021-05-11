@@ -5,15 +5,11 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObjectPrefab;
-    public Transform PrefabTransform
-    {
-        get { return _gameObjectPrefab.transform; }
-    }
+    public Transform PrefabTransform => _gameObjectPrefab.transform;
 
+    //Pool
     [SerializeField] private int _poolDepth;
-
     private readonly List<GameObject> _pool = new List<GameObject>();
-
 
     private void Awake()
     {

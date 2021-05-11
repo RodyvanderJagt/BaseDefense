@@ -13,14 +13,14 @@ public class HandleOutOfBounds : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.z < minZ)
+        if (transform.position.z < minZ || transform.position.z > maxZ)
         {
             if (GetComponent<EnemyUnit>())
             {
                 OnUnitInBase?.Invoke(GetComponent<EnemyUnit>().DamageToBase);
-                Debug.Log("Base!");
             }
             this.gameObject.SetActive(false);
         }
+
     }
 }

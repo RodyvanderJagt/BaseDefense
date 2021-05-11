@@ -778,8 +778,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPool: {fileID: 1075674125308475403}
   _missilePlaceholder:
-  - {fileID: 1606972635}
   - {fileID: 242489346}
+  - {fileID: 1606972635}
   _missileCooldown: 5
 --- !u!114 &1075674125308475403 stripped
 MonoBehaviour:

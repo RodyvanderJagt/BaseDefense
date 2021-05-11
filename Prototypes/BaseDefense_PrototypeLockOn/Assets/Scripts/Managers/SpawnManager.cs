@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Header("Spawn pools")]
+    [SerializeField] ObjectPool _helicopterPool;
+    [SerializeField] ObjectPool _tankPool;
+
+    [Header("Spawn Location")]
     [SerializeField] private float _spawnRangeX;
     [SerializeField] private float _spawnHorizonZ;
     [SerializeField] private float _spawnHeightY;
 
-    [SerializeField] ObjectPool _helicopterPool;
-    [SerializeField] ObjectPool _tankPool;
-
+    [Header("Spawn rate")]
     [SerializeField] private float _spawnRateTank = 2f;
     [SerializeField] private float _spawnRateHelicopter = 2f;
 
     [SerializeField] private float _spawnDelay = 5f;
-
-
 
     private void Start()
     {

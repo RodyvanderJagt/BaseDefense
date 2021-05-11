@@ -9,8 +9,8 @@ public class FireHeatseekingMissiles : FireMissiles
     [SerializeField] private List<GameObject> _crosshairs = new List<GameObject>();
     [SerializeField] private Vector3 _crosshairOffset = Vector3.zero;
 
-    [SerializeField] private List<EnemyUnit> _validTargets = new List<EnemyUnit>();
-    [SerializeField] private EnemyUnit[] _targets;
+    private List<EnemyUnit> _validTargets = new List<EnemyUnit>();
+    private EnemyUnit[] _targets;
 
     private bool _bCanFire = true;
 
@@ -33,6 +33,7 @@ public class FireHeatseekingMissiles : FireMissiles
             MissileFireProtocol();
         }
     }
+    #region Target selection
 
     IEnumerator AcquireTargets()
     {
@@ -97,13 +98,14 @@ public class FireHeatseekingMissiles : FireMissiles
 
     private void ClearTargets()
     {
-
         _validTargets.Clear();
         foreach (GameObject ch in _crosshairs)
         {
             ch.SetActive(false);
         }
     }
+
+    #endregion
 
     private void MissileFireProtocol()
     {
