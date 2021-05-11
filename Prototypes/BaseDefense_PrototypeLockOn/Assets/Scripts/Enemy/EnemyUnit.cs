@@ -5,10 +5,26 @@ using UnityEngine;
 
 public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 {
-    [SerializeField] private float _health = 100;
+    [SerializeField] private float _maxHealth = 100;
+    [SerializeField] private float _speed = 100;
+
+    public delegate void ChangeActive(EnemyUnit _unit);
+    public event ChangeActive OnDestruction;
+
+    private float _health;
     private bool _isVisible = true;
 
     public float Health => _health;
+
+    private void OnEnable()
+    {
+        _health = _maxHealth;
+    }
+
+    private void Update()
+    {
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+    }
 
     public void TakeDamage(float damageTaken)
     {
@@ -21,7 +37,8 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     protected virtual void HandleDestruction()
     {
-        this.gameObject.SetActive(false);
+        OnDestruction?.Invoke(this);
+        gameObject.SetActive(false);
     }
 
     private void OnBecameVisible()

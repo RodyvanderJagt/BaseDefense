@@ -9,6 +9,7 @@ public class ObjectPool : MonoBehaviour
 
     private readonly List<GameObject> _pool = new List<GameObject>();
 
+
     private void Awake()
     {
         for (int i = 0; i < _poolDepth; i++)

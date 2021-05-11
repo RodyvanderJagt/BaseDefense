@@ -30,30 +30,26 @@ public class FireHeatseekingMissiles : FireMissiles
             StopCoroutine(nameof(AcquireTargets));
             _bCanFire = true;
         }
+
+
         //fire missiles
         if (Input.GetKeyDown(KeyCode.Space))
         {
             MissileFireProtocol();
         }
+
+        
     }
 
     IEnumerator AcquireTargets()
     {
         _bCanFire = false;
 
+        _targets = FindObjectsOfType<EnemyUnit>();
+
         GetValidTargets();
 
-        for (int i = 0; i < Mathf.Min(_crosshairs.Count, _validTargets.Count); i++)
-        {
-            if (_validTargets[i] != null)
-            {
-                //Crosshairs
-                GameObject ch = _crosshairs[i];
-                ch.gameObject.SetActive(true);
-                ch.transform.SetParent(_validTargets[i].transform);
-                ch.transform.localPosition = Vector3.zero; 
-            }
-        }
+        //TrackTargets();
 
         yield return new WaitForSeconds(lockonTime);
 
@@ -74,10 +70,44 @@ public class FireHeatseekingMissiles : FireMissiles
             }
         }
         _validTargets.Sort();
+
+        TrackTargets();
+    }
+
+    private void TrackTargets()
+    {
+        for (int i = 0; i < Mathf.Min(_crosshairs.Count, _validTargets.Count); i++)
+        {
+            GameObject ch = _crosshairs[i];
+            if (_validTargets[i] != null)
+            {
+                ch.gameObject.SetActive(true);
+                ch.transform.SetParent(_validTargets[i].transform);
+                ch.transform.localPosition = Vector3.zero;
+
+                _validTargets[i].OnDestruction += RemoveFromValidTargets;
+            }
+            else
+            {
+                ch.transform.SetParent(gameObject.transform);
+                ch.gameObject.SetActive(false);
+            }
+        }
+    }
+    private void RemoveFromValidTargets(EnemyUnit _removedUnit)
+    {
+        _removedUnit.OnDestruction -= RemoveFromValidTargets;
+        if(_validTargets.Remove(_removedUnit))
+        {
+            _validTargets.Insert(Mathf.Min(1, _validTargets.Count), null);
+        }
+
+        TrackTargets();
     }
 
     private void ClearTargets()
     {
+
         _validTargets.Clear();
         foreach (GameObject ch in _crosshairs)
         {
@@ -96,16 +126,20 @@ public class FireHeatseekingMissiles : FireMissiles
 
         if (_missilePlaceholder[missileIndex].gameObject.activeSelf)
         {
-            FireMissile(missileIndex, _validTargets[0]);
+            if(_validTargets[0] != null)
+                FireMissile(missileIndex, _validTargets[0]);
+
             if (_missilePlaceholder[missileIndex ^ 1].gameObject.activeSelf && _validTargets.Count > 1)
             {
-                FireMissile(missileIndex ^ 1, _validTargets[1]);
+                if (_validTargets[1] != null)
+                    FireMissile(missileIndex ^ 1, _validTargets[1]);
             }
             ClearTargets();
         }
         else if (_missilePlaceholder[missileIndex ^ 1].gameObject.activeSelf)
         {
-            FireMissile(missileIndex ^ 1, _validTargets[0]);
+            if (_validTargets[0] != null)
+                FireMissile(missileIndex ^ 1, _validTargets[0]);
             ClearTargets();
         }
     }
