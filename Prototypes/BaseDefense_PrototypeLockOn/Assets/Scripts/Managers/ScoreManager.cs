@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : Singleton<ScoreManager>
 {
     [SerializeField] private int _baseMaxHealth = 1000;
     private int _baseHealth;
-    private int _currentScore;  
+    private int _currentScore;
 
     private void Start()
     {

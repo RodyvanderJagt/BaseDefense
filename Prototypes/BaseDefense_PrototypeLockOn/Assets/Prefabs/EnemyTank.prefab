@@ -436,7 +436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _speed: 25
+  _speed: 12
+  _scoreOnDestroy: 100
+  _damageToBase: 100
   _minRangeZ: 150
 --- !u!114 &114093357080846344
 MonoBehaviour:
@@ -450,8 +452,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95530992744484d489954fa7257e5185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZ: 1000
-  minZ: -50
 --- !u!1 &955944020012043167
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class FireGun : MonoBehaviour
 {
+    //Shoot FX
     [SerializeField] AudioClip _shootSFX;
-    [SerializeField] float _shootSFXVolume = 1;
-    [SerializeField] float _shootFireDelay = 0.1f;
-
     [SerializeField] ParticleSystem _shootFX;
-    [SerializeField] ObjectPool _impactFXPool;
 
-    //[SerializeField] ParticleSystem _impactFX;
+    //Bullet impact FX
+    [SerializeField] ObjectPool _impactFXSandPool;
+    [SerializeField] ObjectPool _impactFXMetalPool;
+    [SerializeField] AudioSource _impactAudioSource;
+    [SerializeField] AudioClip _impactSFXSand;
+    [SerializeField] AudioClip _impactSFXMetal;
 
     [SerializeField] float _shootRange;
+    [SerializeField] float _shootFireDelay = 0.1f;
+    [SerializeField] float _damage = 5f;
     private AudioSource _audioSource;
 
     private void Start()
@@ -37,37 +41,51 @@ public class FireGun : MonoBehaviour
         {
             StartCoroutine(nameof(PlayShootFX));
 
-            HitEffects();
-
-
+            Hit();
         }
     }
 
     IEnumerator PlayShootFX()
     {
         _shootFX.gameObject.SetActive(true);
-        _audioSource.PlayOneShot(_shootSFX, _shootSFXVolume);
+        _audioSource.Play();
         yield return new WaitForSeconds(_shootFireDelay);
         _shootFX.gameObject.SetActive(false);
         _audioSource.Stop();
     }  
 
-    private void HitEffects()
+    private void Hit()
     {
         RaycastHit hit;
         if(Physics.Raycast(gameObject.transform.position + transform.forward * 3.1f, transform.forward, out hit, _shootRange))
         {
-            //Debug: find hit object
             if (hit.collider.gameObject)
             {
-                Debug.Log(hit.collider.gameObject.name);
+                IDamageable damageTaker = hit.collider.gameObject.GetComponent<IDamageable>();
+                GameObject _impactFX;
+
+                if (damageTaker != null)
+                {
+                    damageTaker.TakeDamage(_damage);
+                    _impactFX = _impactFXMetalPool.GetAvailableObject();
+                    _impactAudioSource.clip = _impactSFXMetal;
+                }
+                else
+                {
+                    _impactFX = _impactFXSandPool.GetAvailableObject();
+                    _impactAudioSource.clip = _impactSFXSand;
+                }
+
+                if (_impactFX != null)
+                {
+                    _impactFX.transform.position = transform.position + transform.TransformDirection(Vector3.forward) * hit.distance;
+                    _impactFX.gameObject.SetActive(true);
+                    _impactAudioSource.pitch = Random.Range(0.8f, 1.2f);
+                    _impactAudioSource.Play();
+                }
             }
-            GameObject _impactFX = _impactFXPool.GetAvailableObject();
-            if (_impactFX != null)
-            {
-                _impactFX.transform.position = transform.position + transform.TransformDirection(Vector3.forward) * hit.distance;
-                _impactFX.gameObject.SetActive(true);
-            }
+
+
         }
 
     }

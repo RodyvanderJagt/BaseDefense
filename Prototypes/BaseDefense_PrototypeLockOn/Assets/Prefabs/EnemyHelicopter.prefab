@@ -202,9 +202,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _speed: 50
+  _speed: 25
+  _scoreOnDestroy: 100
+  _damageToBase: 100
+  _minRangeZ: 150
   mainRotor: {fileID: 3765054720388606495}
   tailRotor: {fileID: 3765054720388388887}
+  _crashAngularVelocity: {x: 2, y: 5, z: 0}
 --- !u!114 &114763050525755428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,8 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95530992744484d489954fa7257e5185, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZ: 1000
-  minZ: -50
 --- !u!1 &3765054720388606495
 GameObject:
   m_ObjectHideFlags: 0

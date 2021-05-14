@@ -50,11 +50,12 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     public void TakeDamage(float damageTaken)
     {
-        _health -= damageTaken; 
+        _health -= damageTaken;
         if (_health <= 0)
         {
             MakeUntargetable();
             HandleDestruction();
+
         }
     }
 
