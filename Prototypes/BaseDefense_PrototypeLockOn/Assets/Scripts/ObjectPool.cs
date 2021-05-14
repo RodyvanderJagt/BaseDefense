@@ -5,7 +5,6 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObjectPrefab;
-    public Transform PrefabTransform => _gameObjectPrefab.transform;
 
     //Pool
     [SerializeField] private int _poolDepth;
@@ -16,7 +15,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < _poolDepth; i++)
         {
             GameObject pooledObject = Instantiate(_gameObjectPrefab);
-            pooledObject.SetActive(false);
+            pooledObject.gameObject.SetActive(false);
             _pool.Add(pooledObject);
         }
     }
@@ -25,7 +24,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < _pool.Count; i++)
         {
-            if (_pool[i].activeInHierarchy == false)
+            if (_pool[i].gameObject.activeInHierarchy == false)
                 return _pool[i];
         }
         return null; 

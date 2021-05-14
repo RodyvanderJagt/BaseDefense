@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
@@ -19,7 +20,15 @@ public class Projectile : MonoBehaviour
 
     protected virtual void HandleDestruction()
     {
+        ParticleSystem explosionToPlay = ExplosionManager.Instance.projectileExplosionPool.GetAvailableObject().GetComponent<ParticleSystem>();
+        if (explosionToPlay != null)
+        {
+            explosionToPlay.transform.position = this.transform.position;
+            explosionToPlay.gameObject.SetActive(true);
+            explosionToPlay.Play();
+        }
         gameObject.SetActive(false);
+        
     }
 
 }

@@ -140,8 +140,8 @@ GameObject:
   - component: {fileID: 7848659225164324625}
   - component: {fileID: 3104694767973532946}
   - component: {fileID: 82833359222809214}
-  - component: {fileID: 114837968116736566}
-  - component: {fileID: 104493441813877940}
+  - component: {fileID: 1853167406530257920}
+  - component: {fileID: 2550427688701750819}
   m_Layer: 0
   m_Name: gunBarrel1
   m_TagString: Untagged
@@ -224,8 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shootSFX: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   _shootFX: {fileID: 2287616821010570606}
-  _impactFXSandPool: {fileID: 114837968116736566}
-  _impactFXMetalPool: {fileID: 104493441813877940}
+  _impactFXSandPool: {fileID: 1853167406530257920}
+  _impactFXMetalPool: {fileID: 2550427688701750819}
   _impactAudioSource: {fileID: 3487716184057820746}
   _impactSFXSand: {fileID: 8300000, guid: ea59d39fa74faef4691d27695d8fd0bb, type: 3}
   _impactSFXMetal: {fileID: 8300000, guid: 738e3bff6c9edfe409dcb5b68d82d66a, type: 3}
@@ -400,7 +400,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &114837968116736566
+--- !u!114 &1853167406530257920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,13 +409,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7848659225164324626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b9d85716ab2a94faa6d5ef71ba9d10, type: 3}
+  m_Script: {fileID: 11500000, guid: dca7dc915847ede4b9fa286881560abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObjectPrefab: {fileID: 2432985563136772719, guid: f9404deafa93bf4469a29d7744dcb047,
     type: 3}
   _poolDepth: 26
---- !u!114 &104493441813877940
+--- !u!114 &2550427688701750819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7848659225164324626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b9d85716ab2a94faa6d5ef71ba9d10, type: 3}
+  m_Script: {fileID: 11500000, guid: dca7dc915847ede4b9fa286881560abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameObjectPrefab: {fileID: 100002, guid: 00fedc70b62a31e448e8ccc298257b56, type: 3}
