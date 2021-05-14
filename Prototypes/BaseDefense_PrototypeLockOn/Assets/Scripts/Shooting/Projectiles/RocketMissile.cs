@@ -26,6 +26,11 @@ public class RocketMissile : Projectile
         base.HandleDestruction();
     }
 
+    protected override GameObject GetExplosion()
+    {
+        return ExplosionManager.Instance.rocketExplosionPool.GetAvailableObject();
+    }
+
     private void AOEDamage()
     {
         Collider[] CollidersHit = Physics.OverlapSphere(this.transform.position, _aoeRadius);

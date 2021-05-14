@@ -96,7 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 250
   _damage: 100
-  _explosionPS: {fileID: 19800004, guid: b46890100828db6429ff69c322b45893, type: 3}
   _aoeRadius: 50
   _aoeDamage: 100
 --- !u!114 &114078017533792326

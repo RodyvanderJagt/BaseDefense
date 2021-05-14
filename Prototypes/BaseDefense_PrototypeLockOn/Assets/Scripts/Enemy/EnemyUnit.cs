@@ -55,14 +55,25 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
         {
             MakeUntargetable();
             HandleDestruction();
-
         }
     }
 
     protected virtual void HandleDestruction()
     {
         OnUnitDied?.Invoke(_scoreOnDestroy);
+
+        GameObject explosion = GetExplosion();
+        if (explosion != null)
+        {
+            explosion.transform.position = transform.position;
+            explosion.SetActive(true);
+        }
         gameObject.SetActive(false);
+    }
+
+    protected virtual GameObject GetExplosion()
+    {
+        return null;
     }
 
     private void OnBecameVisible()

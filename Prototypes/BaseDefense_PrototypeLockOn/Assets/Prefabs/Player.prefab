@@ -192,8 +192,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectPool: {fileID: 2677054082922376338}
   _missilePlaceholder:
-  - {fileID: 5351332496000780881}
   - {fileID: 7440682901424329622}
+  - {fileID: 5351332496000780881}
   _missileCooldown: 3
 --- !u!82 &1463448771626244728
 AudioSource:

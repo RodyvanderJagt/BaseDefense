@@ -11,9 +11,6 @@ public class FireGun : MonoBehaviour
     //Bullet impact FX
     [SerializeField] ObjectPool _impactFXSandPool;
     [SerializeField] ObjectPool _impactFXMetalPool;
-    [SerializeField] AudioSource _impactAudioSource;
-    [SerializeField] AudioClip _impactSFXSand;
-    [SerializeField] AudioClip _impactSFXMetal;
 
     [SerializeField] float _shootRange;
     [SerializeField] float _shootFireDelay = 0.1f;
@@ -68,20 +65,17 @@ public class FireGun : MonoBehaviour
                 {
                     damageTaker.TakeDamage(_damage);
                     _impactFX = _impactFXMetalPool.GetAvailableObject();
-                    _impactAudioSource.clip = _impactSFXMetal;
                 }
                 else
                 {
                     _impactFX = _impactFXSandPool.GetAvailableObject();
-                    _impactAudioSource.clip = _impactSFXSand;
                 }
 
                 if (_impactFX != null)
                 {
                     _impactFX.transform.position = transform.position + transform.TransformDirection(Vector3.forward) * hit.distance;
+                    _impactFX.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
                     _impactFX.gameObject.SetActive(true);
-                    _impactAudioSource.pitch = Random.Range(0.8f, 1.2f);
-                    _impactAudioSource.Play();
                 }
             }
 

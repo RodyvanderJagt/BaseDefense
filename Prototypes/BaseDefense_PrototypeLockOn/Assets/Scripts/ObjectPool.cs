@@ -5,6 +5,8 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private GameObject _gameObjectPrefab;
+    public Transform PrefabTransform => _gameObjectPrefab.gameObject.transform;
+
 
     //Pool
     [SerializeField] private int _poolDepth;
@@ -27,6 +29,8 @@ public class ObjectPool : MonoBehaviour
             if (_pool[i].gameObject.activeInHierarchy == false)
                 return _pool[i];
         }
-        return null; 
+        GameObject newObject = Instantiate(_gameObjectPrefab);
+        _pool.Add(newObject);
+        return newObject;
     }
 }

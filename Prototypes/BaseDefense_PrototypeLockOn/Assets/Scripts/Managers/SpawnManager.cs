@@ -32,6 +32,7 @@ public class SpawnManager : Singleton<SpawnManager>
         if(tankToSpawn != null)
         {
             tankToSpawn.transform.position = GenerateSpawnPosition(0);
+            tankToSpawn.transform.rotation = _tankPool.PrefabTransform.rotation;
             tankToSpawn.gameObject.SetActive(true);
 
         }
@@ -44,6 +45,7 @@ public class SpawnManager : Singleton<SpawnManager>
         if (helicopterToSpawn != null)
         {
             helicopterToSpawn.transform.position = GenerateSpawnPosition(GenerateSpawnHeight());
+            helicopterToSpawn.transform.rotation = _helicopterPool.PrefabTransform.rotation;
             helicopterToSpawn.gameObject.SetActive(true);
         }
     }

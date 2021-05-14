@@ -302,6 +302,9 @@ GameObject:
   - component: {fileID: 1373302565}
   - component: {fileID: 1373302564}
   - component: {fileID: 1373302566}
+  - component: {fileID: 1373302567}
+  - component: {fileID: 1373302569}
+  - component: {fileID: 1373302568}
   m_Layer: 0
   m_Name: ExplosionManager
   m_TagString: Untagged
@@ -322,6 +325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileExplosionPool: {fileID: 1373302566}
+  rocketExplosionPool: {fileID: 1373302567}
+  tankExplosionPool: {fileID: 1373302569}
+  helicopterExplosionPool: {fileID: 1373302568}
 --- !u!4 &1373302565
 Transform:
   m_ObjectHideFlags: 0
@@ -350,6 +356,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameObjectPrefab: {fileID: 100004, guid: b46890100828db6429ff69c322b45893, type: 3}
   _poolDepth: 4
+--- !u!114 &1373302567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373302563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca7dc915847ede4b9fa286881560abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObjectPrefab: {fileID: 100008, guid: 06736895ea0a4ff408d25e6684dce797, type: 3}
+  _poolDepth: 4
+--- !u!114 &1373302568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373302563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca7dc915847ede4b9fa286881560abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObjectPrefab: {fileID: 100008, guid: 1dbc518224e49f34095aab42fe05751a, type: 3}
+  _poolDepth: 0
+--- !u!114 &1373302569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373302563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dca7dc915847ede4b9fa286881560abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameObjectPrefab: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
+  _poolDepth: 0
 --- !u!1 &1390601953
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +629,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5254101382816812075, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2daa97c8adfb2d44487bde01b59962b4, type: 3}
 --- !u!1001 &7753187633482504681
