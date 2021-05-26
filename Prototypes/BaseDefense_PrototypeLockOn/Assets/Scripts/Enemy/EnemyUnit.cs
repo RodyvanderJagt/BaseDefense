@@ -50,7 +50,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     public void TakeDamage(float damageTaken)
     {
-        _health -= damageTaken; 
+        _health -= damageTaken;
         if (_health <= 0)
         {
             MakeUntargetable();
@@ -61,7 +61,19 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     protected virtual void HandleDestruction()
     {
         OnUnitDied?.Invoke(_scoreOnDestroy);
+
+        GameObject explosion = GetExplosion();
+        if (explosion != null)
+        {
+            explosion.transform.position = transform.position;
+            explosion.SetActive(true);
+        }
         gameObject.SetActive(false);
+    }
+
+    protected virtual GameObject GetExplosion()
+    {
+        return null;
     }
 
     private void OnBecameVisible()

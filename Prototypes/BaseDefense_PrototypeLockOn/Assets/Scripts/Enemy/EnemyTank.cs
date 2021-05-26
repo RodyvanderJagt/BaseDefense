@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class EnemyTank : EnemyUnit
 {
-
+    protected override GameObject GetExplosion()
+    {
+        return ExplosionManager.Instance.tankExplosionPool.GetAvailableObject();
+    }
 }

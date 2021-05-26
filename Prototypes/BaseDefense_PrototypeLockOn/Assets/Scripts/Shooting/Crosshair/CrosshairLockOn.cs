@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Crosshair : MonoBehaviour
+public class CrosshairLockOn : MonoBehaviour
 {
     private Image _crosshairImage;
 

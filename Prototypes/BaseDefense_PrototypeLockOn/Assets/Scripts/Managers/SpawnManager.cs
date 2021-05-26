@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : Singleton<SpawnManager>
 {
     [Header("Spawn pools")]
     [SerializeField] ObjectPool _helicopterPool;
@@ -31,8 +31,8 @@ public class SpawnManager : MonoBehaviour
 
         if(tankToSpawn != null)
         {
-            tankToSpawn.transform.rotation = _tankPool.PrefabTransform.rotation;
             tankToSpawn.transform.position = GenerateSpawnPosition(0);
+            tankToSpawn.transform.rotation = _tankPool.PrefabTransform.rotation;
             tankToSpawn.gameObject.SetActive(true);
 
         }
@@ -44,8 +44,8 @@ public class SpawnManager : MonoBehaviour
 
         if (helicopterToSpawn != null)
         {
-            helicopterToSpawn.transform.rotation = _helicopterPool.PrefabTransform.rotation;
             helicopterToSpawn.transform.position = GenerateSpawnPosition(GenerateSpawnHeight());
+            helicopterToSpawn.transform.rotation = _helicopterPool.PrefabTransform.rotation;
             helicopterToSpawn.gameObject.SetActive(true);
         }
     }

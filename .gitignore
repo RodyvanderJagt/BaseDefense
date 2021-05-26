@@ -23,6 +23,9 @@
 
 !**/[Aa]ssets/[Tt]extures/
 !**/[Aa]ssets/[Tt]extures/**
+
+!**/[Aa]ssets/FX/
+!**/[Aa]ssets/FX/**
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 #!/[Aa]ssets/**/*.meta
 
