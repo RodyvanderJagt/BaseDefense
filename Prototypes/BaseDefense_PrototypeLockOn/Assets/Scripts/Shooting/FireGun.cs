@@ -17,6 +17,9 @@ public class FireGun : MonoBehaviour
     [SerializeField] float _damage = 5f;
     private AudioSource _audioSource;
 
+    public delegate void OnHit();
+    public static event OnHit OnHitUnit;
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -65,6 +68,7 @@ public class FireGun : MonoBehaviour
                 {
                     damageTaker.TakeDamage(_damage);
                     _impactFX = _impactFXMetalPool.GetAvailableObject();
+                    OnHitUnit?.Invoke();
                 }
                 else
                 {

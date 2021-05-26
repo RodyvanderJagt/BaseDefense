@@ -629,11 +629,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3052223345044395202, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052223345044395202, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052223345044395202, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5254101382816812075, guid: 2daa97c8adfb2d44487bde01b59962b4,
         type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _OnHitColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _OnHitColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _OnHitColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _hitTimer
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _DefaultColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _OnHitColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283313580383880853, guid: 2daa97c8adfb2d44487bde01b59962b4,
+        type: 3}
+      propertyPath: _OnHitScale
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2daa97c8adfb2d44487bde01b59962b4, type: 3}
 --- !u!1001 &7753187633482504681

@@ -16,10 +16,13 @@ public class EnemyHelicopter : EnemyUnit
     //Crash
     [Header("Crash")]
     [SerializeField] private Vector3 _crashAngularVelocity = Vector3.zero;
+    private ParticleSystem _helicopterSmoke;
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        _helicopterSmoke = GetComponent<ParticleSystem>();
 
         helicopterRb = GetComponent<Rigidbody>();
         helicopterRb.velocity = transform.forward * _speed;
@@ -39,6 +42,7 @@ public class EnemyHelicopter : EnemyUnit
     {
         helicopterRb.angularVelocity = _crashAngularVelocity;
         helicopterRb.useGravity = true;
+        _helicopterSmoke.Play();
     }
 
     protected override GameObject GetExplosion()
