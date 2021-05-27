@@ -13,11 +13,9 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     [SerializeField] private float _minRangeZ = 150;
 
-    public delegate void ChangeActive(EnemyUnit _unit);
-    public event ChangeActive OnInvalid;
-
-    public delegate void UpdateInt(int _points);
-    public static event UpdateInt OnUnitDied;
+   
+    public event Events.OnInvalidTarget OnInvalid;
+    public static Events.OnScoreUpdate OnUnitDied;
 
     private Rigidbody _unitRb;
     private float _health;

@@ -7,17 +7,15 @@ public class HandleOutOfBounds : MonoBehaviour
     [SerializeField] static float maxZ = 1000;
     [SerializeField] static float minZ = -50;
 
-    public delegate void OnBaseDamaged(int _damageToBase);
-    public static event OnBaseDamaged OnUnitInBase;
-
+    public static event Events.OnDamageToBase OnDamageToBase;
 
     void Update()
     {
         if (transform.position.z < minZ || transform.position.z > maxZ)
         {
-            if (GetComponent<EnemyUnit>())
+            if (gameObject.GetComponent<EnemyUnit>())
             {
-                OnUnitInBase?.Invoke(GetComponent<EnemyUnit>().DamageToBase);
+                OnDamageToBase?.Invoke(gameObject.GetComponent<EnemyUnit>().DamageToBase);
             }
             this.gameObject.SetActive(false);
         }

@@ -21,9 +21,44 @@ public class SpawnManager : Singleton<SpawnManager>
 
     private void Start()
     {
+        GamePhaseManager.Instance.OnGamePhaseChanged += HandleGamePhaseChanged;
+
+    }
+
+    #region Game phase
+
+    private void HandleGamePhaseChanged(GamePhaseManager.GamePhase gamePhase)
+    {
+        switch (gamePhase)
+        {
+            case GamePhaseManager.GamePhase.STARTING:
+                break;
+            case GamePhaseManager.GamePhase.PLAYING:
+                HandleGamePlaying();
+                break;
+            case GamePhaseManager.GamePhase.GAMEOVER:
+                HandleGameOver();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void HandleGamePlaying()
+    {
+        //spawn enemies
         InvokeRepeating(nameof(SpawnTank), _spawnDelay, _spawnRateTank);
         InvokeRepeating(nameof(SpawnHelicopter), _spawnDelay, _spawnRateHelicopter);
     }
+
+    private void HandleGameOver()
+    {
+        CancelInvoke();
+    }
+
+    #endregion
+
+    #region Spawning
 
     private void SpawnTank()
     {
@@ -60,5 +95,7 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         return new Vector3(Random.Range(-_spawnRangeX, _spawnRangeX), spawnHeight, _spawnHorizonZ);
     }
+
+    #endregion
 
 }
