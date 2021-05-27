@@ -18,7 +18,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     public static Events.OnScoreUpdate OnUnitDied;
 
     private Rigidbody _unitRb;
-    private float _health;
+    [SerializeField] private float _health;
     private bool _isTargetable = true;
 
     public float Health => _health;
@@ -76,7 +76,10 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     private void OnBecameVisible()
     {
-        _isTargetable = true;
+        if (Health > 0 && transform.position.z > _minRangeZ)
+        {
+            _isTargetable = true;
+        }
     }
     private void OnBecameInvisible()
     {
@@ -87,8 +90,8 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     {
         if (_isTargetable)
         {
-            OnInvalid?.Invoke(this);
             _isTargetable = false;
+            OnInvalid?.Invoke(this);
         }
     }
 

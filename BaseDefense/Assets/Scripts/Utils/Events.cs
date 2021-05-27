@@ -13,4 +13,5 @@ public class Events
     public delegate void OnInvalidTarget(EnemyUnit unit);
 
     public delegate void OnGamePhaseChanged(GamePhaseManager.GamePhase gamePhase);
+    public delegate void OnGameStateChanged(GameManager.GameState currentGameState, GameManager.GameState previousGameState);
 }
