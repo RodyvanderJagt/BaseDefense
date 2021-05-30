@@ -9,15 +9,21 @@ public class ScoreManager : Singleton<ScoreManager>
     private int _baseHealth;
     private int _currentScore = 0;
 
-    public Events.OnScoreUpdate OnScoreUpdate;
-    public Events.OnGameOver OnGameOver;
+    public event Action<int> OnScoreUpdate;
+    public event Action OnGameOver;
 
     private void Start()
     {
         GamePhaseManager.Instance.OnGamePhaseChanged += HandleGamePhaseChanged;
+        GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
+    }
 
-        //See if you can remove this later when starting game after level succesfully loaded.
-        HandleGameStart();
+    private void HandleGameStateChanged(GameManager.GameState newState, GameManager.GameState previousState)
+    {
+        if (newState == GameManager.GameState.PREGAME)
+        {
+            HighscoreManager.Instance.UpdateHighScore(_currentScore);
+        }
     }
 
     #region Game phase
@@ -45,14 +51,16 @@ public class ScoreManager : Singleton<ScoreManager>
         _currentScore = 0;
         _baseHealth = _baseMaxHealth;
 
-        EnemyUnit.OnUnitDied += UpdateScore;
+        EnemyUnit.OnUnitDiedUpdateScore += UpdateScore;
         HandleOutOfBounds.OnDamageToBase += UpdateBaseHealth;
     }
 
     private void HandleGameOver()
     {
-        EnemyUnit.OnUnitDied -= UpdateScore;
+        EnemyUnit.OnUnitDiedUpdateScore -= UpdateScore;
         HandleOutOfBounds.OnDamageToBase -= UpdateBaseHealth;
+
+        HighscoreManager.Instance.UpdateHighScore(_currentScore);
     }
 
     #endregion
@@ -62,6 +70,7 @@ public class ScoreManager : Singleton<ScoreManager>
     private void UpdateScore(int _scoreToAdd)
     {
         _currentScore += _scoreToAdd;
+
         OnScoreUpdate?.Invoke(_currentScore);
     }
 
@@ -70,6 +79,7 @@ public class ScoreManager : Singleton<ScoreManager>
         _baseHealth -= _healthLost;
         if (_baseHealth <= 0)
         {
+            
             OnGameOver?.Invoke();
         }
     }

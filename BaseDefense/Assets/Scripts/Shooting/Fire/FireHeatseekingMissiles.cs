@@ -77,7 +77,7 @@ public class FireHeatseekingMissiles : FireMissiles
                 ch.transform.SetParent(_validTargets[i].transform);
                 ch.transform.localPosition = _crosshairOffset;
 
-                _validTargets[i].OnInvalid += RemoveFromValidTargets;
+                _validTargets[i].OnInvalidTarget += RemoveFromValidTargets;
             }
             else
             {
@@ -88,7 +88,7 @@ public class FireHeatseekingMissiles : FireMissiles
     }
     private void RemoveFromValidTargets(EnemyUnit _removedUnit)
     {
-        _removedUnit.OnInvalid -= RemoveFromValidTargets;
+        _removedUnit.OnInvalidTarget -= RemoveFromValidTargets;
         if(_validTargets.Remove(_removedUnit))
         {
             _validTargets.Insert(Mathf.Min(1, _validTargets.Count), null);

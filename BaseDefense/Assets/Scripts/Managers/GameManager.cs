@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +27,8 @@ public class GameManager : Singleton<GameManager>
     List<AsyncOperation> _loadOperations = new List<AsyncOperation>();
     string _currentLevelName = string.Empty;
 
-    public Events.OnGameStateChanged OnGameStateChanged;
+
+    public event Action<GameManager.GameState, GameManager.GameState> OnGameStateChanged;
 
     private void Start()
     {
@@ -66,7 +68,6 @@ public class GameManager : Singleton<GameManager>
                 break;
         }
         OnGameStateChanged?.Invoke(CurrentGameState, previousGameState);
-        Debug.Log(gameState);
     }
 
     #region Basic game operations
@@ -78,16 +79,14 @@ public class GameManager : Singleton<GameManager>
     public void RestartGame()
     {
         UnloadLevel("Main");
-        LoadLevel("Main");
     }
     public void TogglePause()
     {
         UpdateState(_currentGameState == GameState.PAUSED ? GameState.RUNNING : GameState.PAUSED);
     }
 
-    public void QuitGame()
+    public void ExitGame()
     {
-        UpdateState(GameState.PREGAME);
         UnloadLevel("Main");
     }
 
@@ -125,9 +124,9 @@ public class GameManager : Singleton<GameManager>
             Debug.LogError("[GameManager] Could not load scene " + levelName);
             return;
         }
+        _currentLevelName = levelName;
         _loadOperations.Add(ao);
         ao.completed += OnLoadLevelComplete;
-        _currentLevelName = levelName;
     }
 
     public void UnloadLevel(string levelName)
@@ -143,10 +142,15 @@ public class GameManager : Singleton<GameManager>
 
     private void OnLoadLevelComplete(AsyncOperation ao)
     {
+        
+
         if (_loadOperations.Remove(ao))
         {
             if (_loadOperations.Count == 0)
             {
+                Scene scene = SceneManager.GetSceneByName(_currentLevelName);
+                SceneManager.SetActiveScene(scene);
+
                 UpdateState(GameState.RUNNING);
             }
         }

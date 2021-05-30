@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private int _poolDepth;
     private readonly List<GameObject> _pool = new List<GameObject>();
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < _poolDepth; i++)
         {

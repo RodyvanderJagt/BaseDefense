@@ -19,7 +19,7 @@ public class GamePhaseManager : Singleton<GamePhaseManager>
 
     private GamePhase _currentGamePhase = GamePhase.STARTING;
 
-    public Events.OnGamePhaseChanged OnGamePhaseChanged;
+    public event Action<GamePhaseManager.GamePhase> OnGamePhaseChanged;
 
     [SerializeField] int _countdownSeconds = 3;
 

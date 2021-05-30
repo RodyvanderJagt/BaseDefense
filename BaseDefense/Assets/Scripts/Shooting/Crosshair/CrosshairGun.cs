@@ -29,4 +29,11 @@ public class CrosshairGun : MonoBehaviour
         yield return new WaitForSeconds(_hitTimer);
         transform.localScale = _defaultScale;
     }
+
+    private void OnDestroy()
+    {
+        FireGun.OnHitUnit -= OnHitUnitHandler;
+
+        StopAllCoroutines();
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ public class HandleOutOfBounds : MonoBehaviour
     [SerializeField] static float maxZ = 1000;
     [SerializeField] static float minZ = -50;
 
-    public static event Events.OnDamageToBase OnDamageToBase;
+    public static event Action<int> OnDamageToBase;
 
     void Update()
     {

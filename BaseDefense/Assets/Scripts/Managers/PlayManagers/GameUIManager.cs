@@ -20,12 +20,11 @@ public class GameUIManager : MonoBehaviour
     {
         ScoreManager.Instance.OnScoreUpdate += UpdateScore;
         GamePhaseManager.Instance.OnGamePhaseChanged += HandleGamePhaseChanged;
+        GameManager.Instance.OnGameStateChanged += HandleGameStateChanged;
 
         _screenList.Add(_titleScreen);
         _screenList.Add(_gameOverScreen);
         _screenList.Add(_scoreScreen);
-
-        
     }
 
     private void SetActiveScreen(GameObject activeScreen)
@@ -62,11 +61,30 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
+    private void HandleGameStateChanged(GameManager.GameState newState, GameManager.GameState previousState)
+    {
+        if (newState == GameManager.GameState.PAUSED)
+        {
+            gameObject.GetComponent<Canvas>().enabled = false;
+        }
+        if (newState == GameManager.GameState.RUNNING)
+        {
+            gameObject.GetComponent<Canvas>().enabled = true;
+        }
+    }
+
     private void UpdateScore(int score)
     {
         _scoreText.text = "Score: " + score;
     }
 
+    private void OnDestroy()
+    {
+        if (GameManager.Instance)
+        {
+            GameManager.Instance.OnGameStateChanged -= HandleGameStateChanged;
+        }
+    }
 
 
 }

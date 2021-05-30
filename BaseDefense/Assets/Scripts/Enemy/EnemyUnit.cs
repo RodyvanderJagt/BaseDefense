@@ -14,8 +14,8 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
     [SerializeField] private float _minRangeZ = 150;
 
    
-    public event Events.OnInvalidTarget OnInvalid;
-    public static Events.OnScoreUpdate OnUnitDied;
+    public event Action<EnemyUnit> OnInvalidTarget;
+    public static event Action<int> OnUnitDiedUpdateScore;
 
     private Rigidbody _unitRb;
     [SerializeField] private float _health;
@@ -58,7 +58,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
 
     protected virtual void HandleDestruction()
     {
-        OnUnitDied?.Invoke(_scoreOnDestroy);
+        OnUnitDiedUpdateScore?.Invoke(_scoreOnDestroy);
 
         GameObject explosion = GetExplosion();
         if (explosion != null)
@@ -91,7 +91,7 @@ public class EnemyUnit : MonoBehaviour, IDamageable, IComparable
         if (_isTargetable)
         {
             _isTargetable = false;
-            OnInvalid?.Invoke(this);
+            OnInvalidTarget?.Invoke(this);
         }
     }
 
